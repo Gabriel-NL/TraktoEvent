@@ -8,6 +8,8 @@ public class TouchManager : MonoBehaviour
     private InputAction touchPosition;
     private InputAction touchPress;
 
+    
+
     public int currentAction=0;
 
     private void Awake () {
@@ -36,5 +38,7 @@ public class TouchManager : MonoBehaviour
             hitData.collider.gameObject.BroadcastMessage("Interact", currentAction);
         }
     }
+
+
 
 }
