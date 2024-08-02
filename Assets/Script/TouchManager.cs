@@ -29,8 +29,9 @@ public class TouchManager : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(screenPos);
         RaycastHit hitData;
         Physics.Raycast(ray, out hitData);
+        
         if (hitData.collider != null && hitData.collider.tag == "Interact") {
-            Debug.Log(hitData.collider.gameObject);
+            hitData.collider.gameObject.BroadcastMessage("Interact");
         }
     }
 

@@ -5,7 +5,9 @@ using UnityEngine;
 public class PlantHealth : MonoBehaviour
 {
     
-    public PlantType plantType=null;
+    private PlantType plantType=null;
+    
+    public string plantTypeName="";
     public int lightPoints=0, waterPoints=0;
     public int age=0;
     public int toNextGrowth=99;
@@ -21,17 +23,25 @@ public class PlantHealth : MonoBehaviour
 
     void SelectSprite () {
         //Redefine a sprite de uma mplanta dependendo do seu estágio
+        if (plantType != null) {
+            plantTypeName = plantType.name;
+        } else {
+            plantTypeName = "";
+        };
     }
 
     void Interact () {
         //Função chamada quando o jogador clica num vaso
+        Debug.Log("Interacting w/" + gameObject.name);
+        InsertSeed(PlantController.plantTypes[1]);
     }
 
     void InsertSeed (PlantType seed) {
         //Plantar semente num vaso vazio
-        if (plantType != null) {
+        if (plantType == null) {
             plantType = seed;
             SelectSprite();
+            toNextGrowth = plantType.growthRate;
         } else {
             Debug.Log("Não é possível plantar num vaso cheio");
         }
@@ -50,7 +60,25 @@ public class PlantHealth : MonoBehaviour
 
     void AdvanceStage () {
         //Calcula para qual estado a planta deve seguir e ajusta sua sprite
-        
+
+        if ((plantType.minWater <= waterPoints && waterPoints <= plantType.maxWater)
+        && (plantType.minLight <= lightPoints && lightPoints <= plantType.maxLight)) {
+            if (currentStage.x < 0) {
+                //Branch ruim -> Sucesso
+                currentStage.x = 1;
+            } else {
+                //Branch boa -> Sucesso
+                currentStage.y += 1;
+            }
+        } else {
+            if (currentStage.x > 0) {
+                //Branch boa -> Falha
+                currentStage.x = -1;
+            } else {
+                //Branch ruim -> Falha
+                currentStage.y += 1;
+            }
+        }
     }
 
     void Remove () {
