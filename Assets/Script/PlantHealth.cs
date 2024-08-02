@@ -7,6 +7,7 @@ public class PlantHealth : MonoBehaviour
     
     private PlantType plantType=null;
     private GameController gameController;
+    private TimeProgression timeProgression;
     
     public string plantTypeName="";
     public int lightPoints=0, waterPoints=0;
@@ -21,6 +22,7 @@ public class PlantHealth : MonoBehaviour
         SelectSprite();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         gameController = GameObject.FindGameObjectsWithTag("GameController")[0].GetComponent<GameController>();
+        timeProgression = gameController.gameObject.GetComponent<TimeProgression>();
     }
 
     void SelectSprite () {
@@ -49,7 +51,12 @@ public class PlantHealth : MonoBehaviour
                 case 3://Magia
                     //(VISUAL) Tocar animação
 
-                    AdvanceTime();
+                    if (timeProgression.currentMagicUses > 0) {
+                        timeProgression.currentMagicUses -= 1;
+                        AdvanceTime();
+                    } else {
+                        Debug.Log("A magia acabou :(");
+                    }
                     break;
                 default://Nenhuma ação
                     break;

@@ -7,6 +7,12 @@ public class TimeProgression : MonoBehaviour
 {
     public int currentDay = 1;
     public int deadlineDay = 9;
+
+    public int maxMagicUses = 3;
+    public int currentMagicUses = 3;
+    public int magicRefreshRate = 1;
+    public int magicRefreshDays = 1;
+    public int refreshCountdown = 0;
     
     private Image dayProgressBar=null;
     private float stageWidth;
@@ -30,6 +36,18 @@ public class TimeProgression : MonoBehaviour
         }
         currentDay += 1;
 
+        //Faz 
+        refreshCountdown += 1;
+        if (refreshCountdown == magicRefreshDays) {
+            if (magicRefreshRate != 0) {
+                currentMagicUses += magicRefreshRate;
+            } else {
+                currentMagicUses = maxMagicUses;
+            }
+            refreshCountdown = 0;
+        }
+
         Debug.Log("Day " + currentDay);
     }
+
 }
