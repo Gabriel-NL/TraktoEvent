@@ -100,6 +100,43 @@ public class PlantHealth : MonoBehaviour
         }
     }
 
+    void React (int action) {
+        //Mostra uma reação a uma determinada ação, que pode ser
+        //1. sol 2. águe
+
+        //Reações:
+        //1. Muito feliz!
+        //2. Feliz
+        //3. Triste
+        //4. Raiva!
+        int reactionOutput = 0;
+
+        switch (action) {
+            case 1:
+                if (waterPoints >= plantType.maxWater) {
+                    reactionOutput = 4;
+                } if (plantType.maxWater >= (plantType.growthRate / 2)) {
+                    reactionOutput = 3;
+                } if (plantType.maxWater <= waterPoints && waterPoints <= plantType.maxWater) {
+                    reactionOutput = 2;
+                }
+                break;
+            case 2:
+                if (lightPoints >= plantType.masLight) {
+                    reactionOutput = 4;
+                } if (plantType.masLight >= (plantType.growthRate / 2)) {
+                    reactionOutput = 3;
+                } if (plantType.masLight <= lightPoints && lightPoints <= plantType.masLight) {
+                    reactionOutput = 2;
+                }
+                break;
+        }
+        if ((plantType.minWater <= waterPoints && waterPoints <= plantType.maxWater)
+        && (plantType.minLight <= lightPoints && lightPoints <= plantType.maxLight)) {
+            reactionOutput = 1;
+        }
+    }
+
     void Remove () {
         //Remove a planta, a revertendo para um vaso vazio
         plantType = null;
