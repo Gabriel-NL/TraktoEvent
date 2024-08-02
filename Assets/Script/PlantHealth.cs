@@ -61,8 +61,9 @@ public class PlantHealth : MonoBehaviour
                 default://Nenhuma ação
                     break;
             }
+            
         } else {
-            InsertSeed(PlantController.plantTypes[1]);
+            InsertSeed(Constants.plantTypes[1]);
         }
         Debug.Log("Ação " + actionId + " em " + plantTypeName);
     }

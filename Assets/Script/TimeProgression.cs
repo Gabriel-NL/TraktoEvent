@@ -23,7 +23,8 @@ public class TimeProgression : MonoBehaviour
 
     void AdjustProgressBar () {
         //(VISUAL) Ajusta a largura da imagem 'progress bar' dependendo do dia atual
-        dayProgressBar.rectTransform.sizeDelta = new Vector2(currentDay * stageWidth, dayProgressBar.rectTransform.sizeDelta.y);
+
+        //dayProgressBar.rectTransform.sizeDelta = new Vector2(currentDay * stageWidth, dayProgressBar.rectTransform.sizeDelta.y);
     }
 
     public void NextDay () {

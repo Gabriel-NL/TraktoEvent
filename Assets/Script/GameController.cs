@@ -7,6 +7,8 @@ public class GameController : MonoBehaviour
     
     private TouchManager touchManager;
 
+    private float speelSlots=3;
+
     void Awake () {
         touchManager = GetComponent<TouchManager>();
     }
@@ -20,5 +22,18 @@ public class GameController : MonoBehaviour
             Debug.Log("Ação resetada");
         }
     }
+
+    private void PopulateSpellSlots(){
+
+        float x1=50,x2=0,x3=-50;
+        float margin=25;
+        float elementSize=25;
+
+        
+
+    }
+
+
+
 
 }
