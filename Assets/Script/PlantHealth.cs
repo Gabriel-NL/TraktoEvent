@@ -34,25 +34,30 @@ public class PlantHealth : MonoBehaviour
 
     void Interact (int actionId) {
         //Função chamada quando o jogador clica num vaso
-        switch (actionId) {
-            case 1://Sol
-                //(VISUAL) Tocar animação
+        if (plantType != null) {
+            switch (actionId) {
+                case 1://Sol
+                    //(VISUAL) Tocar animação
 
-                receiveLight = true;
-                break;
-            case 2://Água
-                //(VISUAL) Tocar animação
+                    receiveLight = true;
+                    break;
+                case 2://Água
+                    //(VISUAL) Tocar animação
 
-                receiveWater = true;
-                break;
-            case 3://Magia
-                //(VISUAL) Tocar animação
+                    receiveWater = true;
+                    break;
+                case 3://Magia
+                    //(VISUAL) Tocar animação
 
-                AdvanceTime();
-                break;
-            default://Nenhuma ação
-                break;
+                    AdvanceTime();
+                    break;
+                default://Nenhuma ação
+                    break;
             }
+        } else {
+            InsertSeed(PlantController.plantTypes[1]);
+        }
+        Debug.Log("Ação " + actionId + " em " + plantTypeName);
     }
 
     void InsertSeed (PlantType seed) {
@@ -82,7 +87,7 @@ public class PlantHealth : MonoBehaviour
 
         if ((plantType.minWater <= waterPoints && waterPoints <= plantType.maxWater)
         && (plantType.minLight <= lightPoints && lightPoints <= plantType.maxLight)) {
-            if (currentStage.x < 0) {
+            if (currentStage.x <= 0) {
                 //Branch ruim -> Sucesso
                 currentStage.x = 1;
             } else {
@@ -98,6 +103,9 @@ public class PlantHealth : MonoBehaviour
                 currentStage.y += 1;
             }
         }
+        toNextGrowth = plantType.growthRate;
+        waterPoints = 0;
+        lightPoints = 0;
     }
 
     void React (int action) {
@@ -122,11 +130,11 @@ public class PlantHealth : MonoBehaviour
                 }
                 break;
             case 2:
-                if (lightPoints >= plantType.masLight) {
+                if (lightPoints >= plantType.maxLight) {
                     reactionOutput = 4;
-                } if (plantType.masLight >= (plantType.growthRate / 2)) {
+                } if (plantType.maxLight >= (plantType.growthRate / 2)) {
                     reactionOutput = 3;
-                } if (plantType.masLight <= lightPoints && lightPoints <= plantType.masLight) {
+                } if (plantType.maxLight <= lightPoints && lightPoints <= plantType.maxLight) {
                     reactionOutput = 2;
                 }
                 break;

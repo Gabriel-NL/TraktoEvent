@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class TimeProgression : MonoBehaviour
 {
-    public int currentDay = 0;
+    public int currentDay = 1;
     public int deadlineDay = 9;
     
     private Image dayProgressBar=null;
@@ -28,5 +28,8 @@ public class TimeProgression : MonoBehaviour
         foreach (GameObject o in objects) {
             o.BroadcastMessage("AdvanceTime");
         }
+        currentDay += 1;
+
+        Debug.Log("Day " + currentDay);
     }
 }

@@ -11,8 +11,14 @@ public class GameController : MonoBehaviour
         touchManager = GetComponent<TouchManager>();
     }
 
-    public void switchAction (int actionId) {
-        touchManager.currentAction = actionId;
+    public void SwitchAction (int actionId) {
+        if (actionId != touchManager.currentAction) {
+            touchManager.currentAction = actionId;
+            Debug.Log("Ação: " + actionId);
+        } else {
+            touchManager.currentAction = 0;
+            Debug.Log("Ação resetada");
+        }
     }
 
 }
