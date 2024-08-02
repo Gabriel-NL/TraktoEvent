@@ -8,6 +8,8 @@ public class TouchManager : MonoBehaviour
     private InputAction touchPosition;
     private InputAction touchPress;
 
+    public int currentAction=0;
+
     private void Awake () {
         playerInput = GetComponent<PlayerInput>();
         touchPosition = playerInput.actions["TouchPosition"];
@@ -31,7 +33,7 @@ public class TouchManager : MonoBehaviour
         Physics.Raycast(ray, out hitData);
         
         if (hitData.collider != null && hitData.collider.tag == "Interact") {
-            hitData.collider.gameObject.BroadcastMessage("Interact");
+            hitData.collider.gameObject.BroadcastMessage("Interact", currentAction);
         }
     }
 

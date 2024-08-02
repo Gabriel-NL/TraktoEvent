@@ -6,6 +6,7 @@ public class PlantHealth : MonoBehaviour
 {
     
     private PlantType plantType=null;
+    private GameController gameController;
     
     public string plantTypeName="";
     public int lightPoints=0, waterPoints=0;
@@ -19,6 +20,7 @@ public class PlantHealth : MonoBehaviour
     void Awake () {
         SelectSprite();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        gameController = GameObject.FindGameObjectsWithTag("GameController")[0].GetComponent<GameController>();
     }
 
     void SelectSprite () {
@@ -30,10 +32,27 @@ public class PlantHealth : MonoBehaviour
         };
     }
 
-    void Interact () {
+    void Interact (int actionId) {
         //Função chamada quando o jogador clica num vaso
-        Debug.Log("Interacting w/" + gameObject.name);
-        InsertSeed(PlantController.plantTypes[1]);
+        switch (actionId) {
+            case 1://Sol
+                //(VISUAL) Tocar animação
+
+                receiveLight = true;
+                break;
+            case 2://Água
+                //(VISUAL) Tocar animação
+
+                receiveWater = true;
+                break;
+            case 3://Magia
+                //(VISUAL) Tocar animação
+
+                AdvanceTime();
+                break;
+            default://Nenhuma ação
+                break;
+            }
     }
 
     void InsertSeed (PlantType seed) {
