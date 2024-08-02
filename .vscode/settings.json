@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "TraktoEvent.sln"
+    "dotnet.defaultSolution": "ProjetoEvento.sln"
 }
