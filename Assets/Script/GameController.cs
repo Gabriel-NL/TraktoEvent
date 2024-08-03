@@ -34,6 +34,10 @@ public class GameController : MonoBehaviour
         SEPlayer.Play();
     }
 
+    public Sprite[] reactionSprites = {
+        //Preenchido no inspector
+    };
+
     public Sprite[] spriteList1 = {
         //Preenchido no inspector
     };

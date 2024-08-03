@@ -1055,6 +1055,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 587f7b1603419834ba06dd36ffcbf30a, type: 3}
   - {fileID: 8300000, guid: 43c912270498b2a4dbe8cef4a87e7927, type: 3}
   - {fileID: 8300000, guid: c4493e66021030a4cb64cdbb9d0b9f61, type: 3}
+  reactionSprites:
+  - {fileID: 0}
+  - {fileID: -395998714, guid: 8495c63ad8ce1954298bfec4eed6d3ea, type: 3}
+  - {fileID: 1535870227, guid: 8495c63ad8ce1954298bfec4eed6d3ea, type: 3}
+  - {fileID: -1283450250, guid: 8495c63ad8ce1954298bfec4eed6d3ea, type: 3}
+  - {fileID: -89094733, guid: 8495c63ad8ce1954298bfec4eed6d3ea, type: 3}
   spriteList1:
   - {fileID: 1850833847, guid: 181f66baf84b29e449c9a57a701316ad, type: 3}
   - {fileID: -1226100898, guid: 181f66baf84b29e449c9a57a701316ad, type: 3}

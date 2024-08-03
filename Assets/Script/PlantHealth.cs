@@ -10,6 +10,7 @@ public class PlantHealth : MonoBehaviour
     private GameController gameController;
     private ControlUI controlUI;
     private TimeProgression timeProgression;
+    private SpriteRenderer reactionImage;
     
     public string plantTypeName="";
     public int lightPoints=0, waterPoints=0;
@@ -21,6 +22,7 @@ public class PlantHealth : MonoBehaviour
     private SpriteRenderer plantSprite;
 
     void Awake () {
+        reactionImage = transform.Find("Reaction").GetComponent<SpriteRenderer>();
         plantSprite = transform.Find("Plant").gameObject.GetComponent<SpriteRenderer>();
         gameController = GameObject.FindGameObjectsWithTag("GameController")[0].GetComponent<GameController>();
         controlUI= GameObject.FindGameObjectsWithTag("GameController")[0].GetComponent<ControlUI>();
@@ -180,35 +182,40 @@ public class PlantHealth : MonoBehaviour
         //2. Feliz
         //3. Triste
         //4. Raiva!
-        int reactionOutput = 0;
+        int reactionOutput = 2;
 
         switch (action) {
             case 1:
                 if (waterPoints >= plantType.maxWater) {
                     reactionOutput = 4;
-                } if (plantType.maxWater >= (plantType.growthRate / 2)) {
+                } if (waterPoints >= (plantType.maxWater / 2)) {
                     reactionOutput = 3;
-                } if (plantType.maxWater <= waterPoints && waterPoints <= plantType.maxWater) {
-                    reactionOutput = 2;
+                } if (plantType.maxWater <= 1) {
+                    reactionOutput = 3;
                 }
                 break;
             case 2:
                 if (lightPoints >= plantType.maxLight) {
                     reactionOutput = 4;
-                } if (plantType.maxLight >= (plantType.growthRate / 2)) {
+                } if (lightPoints >= (plantType.maxLight / 2)) {
                     reactionOutput = 3;
-                } if (plantType.maxLight <= lightPoints && lightPoints <= plantType.maxLight) {
-                    reactionOutput = 2;
+                } if (plantType.maxLight <= 1) {
+                    reactionOutput = 3;
                 }
                 break;
         }
         if ((plantType.minWater <= waterPoints && waterPoints <= plantType.maxWater)
         && (plantType.minLight <= lightPoints && lightPoints <= plantType.maxLight)) {
             reactionOutput = 1;
-        }
+        };
+        StartCoroutine(ReactAndWait(reactionOutput));
+    }
 
+    IEnumerator ReactAndWait (int reactionOutput) {
         gameController.PlaySE(4);
-
+        reactionImage.sprite = gameController.reactionSprites[reactionOutput];
+        yield return new WaitForSeconds(1);
+        reactionImage.sprite = gameController.reactionSprites[0];
     }
 
     void Remove () {
