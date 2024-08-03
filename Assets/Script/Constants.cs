@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Constants : MonoBehaviour
 {
-
+    
     public const string title_state_name="TitleState";
     public const string play_state_name="PlayState";
 
@@ -37,5 +37,7 @@ public class Constants : MonoBehaviour
             3, 99//Nível de água
         ),
     };
+
+
 
 }

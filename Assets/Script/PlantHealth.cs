@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlantHealth : MonoBehaviour
@@ -8,6 +9,7 @@ public class PlantHealth : MonoBehaviour
     private PlantType plantType=null;
     private GameController gameController;
     private ControlUI controlUI;
+    private SpriteList spriteList;
     private TimeProgression timeProgression;
     
     public string plantTypeName="";
@@ -17,6 +19,8 @@ public class PlantHealth : MonoBehaviour
     public bool receiveLight=false, receiveWater=false;
     public Vector2 currentStage=new Vector2(0,0);
 
+    private List<Sprite> effect_list= new List<Sprite>();
+
     private SpriteRenderer spriteRenderer;
 
     void Awake () {
@@ -24,8 +28,12 @@ public class PlantHealth : MonoBehaviour
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         gameController = GameObject.FindGameObjectsWithTag("GameController")[0].GetComponent<GameController>();
         controlUI= GameObject.FindGameObjectsWithTag("GameController")[0].GetComponent<ControlUI>();
+        spriteList = GameObject.FindGameObjectsWithTag("GameController")[0].GetComponent<SpriteList>();
         
         timeProgression = gameController.gameObject.GetComponent<TimeProgression>();
+        NewDay();
+        
+
     }
 
     void SelectSprite () {
@@ -40,16 +48,37 @@ public class PlantHealth : MonoBehaviour
     void Interact (int actionId) {
         //Função chamada quando o jogador clica num vaso
         if (plantType != null) {
+            Transform childTransform;
             switch (actionId) {
                 case 1://Sol
                     //(VISUAL) Tocar animação
+                    childTransform = transform.Find("Sun");
+                    Debug.Log("" + childTransform.name);
+                        
+                    receiveLight=!receiveLight;
+                    childTransform.gameObject.SetActive(receiveLight);
+                    if (receiveLight)
+                    {
+                        Debug.Log("Apaga luz" );
+                        
+                    }else
+                    {
+                        Debug.Log("Acende luz" );
+                    }
 
-                    receiveLight = true;
                     break;
                 case 2://Água
                     //(VISUAL) Tocar animação
 
-                    receiveWater = true;
+                    if (!receiveWater)
+                    {
+                        
+                        receiveWater = true;
+                        childTransform = transform.Find("Water");
+                        Debug.Log("" + childTransform.name);
+                        childTransform.gameObject.SetActive(receiveWater);
+                    }
+
                     break;
                 case 3://Magia
                     //(VISUAL) Tocar animação
@@ -173,5 +202,18 @@ public class PlantHealth : MonoBehaviour
 
         SelectSprite();
     }
+
+    public void NewDay(){
+        Debug.Log("OHAYO SEKAI GOOD MORNING WORLD!!!");
+        receiveLight=false;
+        receiveWater=false;
+        GameObject sunTransform = transform.Find("Sun").gameObject;
+        sunTransform.SetActive(receiveLight);
+        GameObject waterTransform = transform.Find("Water").gameObject;
+        waterTransform.gameObject.SetActive(receiveWater);
+    }
+
+
+
 
 }

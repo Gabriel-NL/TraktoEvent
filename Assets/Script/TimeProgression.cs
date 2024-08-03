@@ -34,6 +34,7 @@ public class TimeProgression : MonoBehaviour
         GameObject[] objects = GameObject.FindGameObjectsWithTag("Interact");
         foreach (GameObject o in objects) {
             o.BroadcastMessage("AdvanceTime");
+            o.BroadcastMessage("NewDay");
         }
         currentDay += 1;
 
