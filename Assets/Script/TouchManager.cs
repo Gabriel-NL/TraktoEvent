@@ -8,7 +8,6 @@ public class TouchManager : MonoBehaviour
     private InputAction touchPosition;
     private InputAction touchPress;
 
-    
 
     public int currentAction=0;
 

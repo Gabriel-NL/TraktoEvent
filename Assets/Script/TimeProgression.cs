@@ -38,7 +38,7 @@ public class TimeProgression : MonoBehaviour
         }
         currentDay += 1;
 
-        //Faz 
+        //Maneja a recuperação do poder mágico
         refreshCountdown += 1;
         if (refreshCountdown == magicRefreshDays) {
             if (magicRefreshRate != 0) {
@@ -50,6 +50,8 @@ public class TimeProgression : MonoBehaviour
         }
 
         Debug.Log("Day " + currentDay);
+        GetComponent<GameController>().PlaySE(2);
+        gameObject.BroadcastMessage("UpdateDayName", currentDay);
     }
 
 }

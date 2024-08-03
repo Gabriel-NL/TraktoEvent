@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1ae12581605de194ca6f5799c895b98b
+guid: 1fb319dbecd8b6f4e89e9e092bedd703
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -81,46 +81,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: iPhone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -136,55 +97,55 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ICONES_0
+      name: sprites_planta_leao_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 64
+        height: 76
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dd5717be7fdeb094aac4efaf125557ad
-      internalID: -1062061683
+      spriteID: cecddd43b85256848af9728a5af75f06
+      internalID: 150317794
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ICONES_1
+      name: sprites_planta_leao_1
       rect:
         serializedVersion: 2
-        x: 48
+        x: 64
         y: 0
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 64
+        height: 76
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ac22919d12813834a9de431d88202400
-      internalID: -2146218127
+      spriteID: 6467e5bf9a13cb944ac706a419fa0123
+      internalID: 129989442
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ICONES_2
+      name: sprites_planta_leao_2A
       rect:
         serializedVersion: 2
-        x: 96
+        x: 128
         y: 0
-        width: 48
-        height: 48
+        width: 64
+        height: 76
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -192,8 +153,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a5d8f6c91c742cd48a7232878ec2f11b
-      internalID: 1676823803
+      spriteID: 401b8cc9fa7e7ec4f850b64dbcbe04b8
+      internalID: -1117248421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprites_planta_leao_3B
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 76
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 861571e8d886826479fa20f6c6ca72c5
+      internalID: -72782222
       vertices: []
       indices: 
       edges: []
@@ -209,9 +191,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      ICONES_0: -1062061683
-      ICONES_1: -2146218127
-      ICONES_2: 1676823803
+      sprites_planta_leao_0: 150317794
+      sprites_planta_leao_1: 129989442
+      sprites_planta_leao_2A: -1117248421
+      sprites_planta_leao_3B: -72782222
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

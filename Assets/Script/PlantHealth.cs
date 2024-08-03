@@ -9,58 +9,56 @@ public class PlantHealth : MonoBehaviour
     private PlantType plantType=null;
     private GameController gameController;
     private ControlUI controlUI;
-    private SpriteList spriteList;
     private TimeProgression timeProgression;
-    
     
     public string plantTypeName="";
     public int lightPoints=0, waterPoints=0;
     public int age=0;
-    public int toNextGrowth=99;
+    public int toNextGrowth=3;
     public bool receiveLight=false, receiveWater=false;
     public Vector2 currentStage=new Vector2(0,0);
 
-    private List<Sprite> effect_list= new List<Sprite>();
-
-    private SpriteRenderer spriteRenderer;
+    private SpriteRenderer plantSprite;
 
     void Awake () {
-        SelectSprite();
-        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        plantSprite = transform.Find("Plant").gameObject.GetComponent<SpriteRenderer>();
         gameController = GameObject.FindGameObjectsWithTag("GameController")[0].GetComponent<GameController>();
         controlUI= GameObject.FindGameObjectsWithTag("GameController")[0].GetComponent<ControlUI>();
-        spriteList = GameObject.FindGameObjectsWithTag("GameController")[0].GetComponent<SpriteList>();
-        
         timeProgression = gameController.gameObject.GetComponent<TimeProgression>();
-        NewDay();
         
+        if (plantType != null) {
+            SelectSprite();
+        };
+        NewDay();
 
+        int newPlantId = int.Parse(gameObject.name.Split(' ')[1]);
+        InsertSeed(Constants.plantTypes[newPlantId]);
     }
 
     void SelectSprite () {
         //Redefine a sprite de uma mplanta dependendo do seu estágio
 
-        if (currentStage== new Vector2(0,0))
-        {
-            spriteRenderer.sprite= spriteList.GetTest(0);
-        }
-
-        if (currentStage== new Vector2(1,0))
-        {
-            spriteRenderer.sprite= spriteList.GetTest(1);
-        }
- 
-        
-        if (plantType != null) {
-            plantTypeName = plantType.name;
-        } else {
-            plantTypeName = "";
+        switch (currentStage.y) {
+            case 0:
+                Debug.Log(plantType.spriteList);
+                plantSprite.sprite = plantType.spriteList[0];
+                break;
+            case 1:
+                plantSprite.sprite = plantType.spriteList[1];
+                break;
+            case 2:
+                if (currentStage.x >= 0) {
+                    plantSprite.sprite = plantType.spriteList[2];
+                } else {
+                    plantSprite.sprite = plantType.spriteList[3];
+                };
+            break;
         };
     }
 
     void Interact (int actionId) {
         //Função chamada quando o jogador clica num vaso
-        if (plantType != null) {
+        if (plantType != null && currentStage.y < 2) {
             Transform childTransform;
             switch (actionId) {
                 case 1://Sol
@@ -70,14 +68,7 @@ public class PlantHealth : MonoBehaviour
                         
                     receiveLight=!receiveLight;
                     childTransform.gameObject.SetActive(receiveLight);
-                    if (receiveLight)
-                    {
-                        Debug.Log("Apaga luz" );
-                        
-                    }else
-                    {
-                        Debug.Log("Acende luz" );
-                    }
+                    React(actionId);
 
                     break;
                 case 2://Água
@@ -90,6 +81,7 @@ public class PlantHealth : MonoBehaviour
                         childTransform = transform.Find("Water");
                         Debug.Log("" + childTransform.name);
                         childTransform.gameObject.SetActive(receiveWater);
+                        React(actionId);
                     }
 
                     break;
@@ -112,8 +104,6 @@ public class PlantHealth : MonoBehaviour
             InsertSeed(Constants.plantTypes[1]);
         }
 
-
-
         Debug.Log("Ação " + actionId + " em " + plantTypeName);
     }
 
@@ -121,20 +111,31 @@ public class PlantHealth : MonoBehaviour
         //Plantar semente num vaso vazio
         if (plantType == null) {
             plantType = seed;
-            SelectSprite();
             toNextGrowth = plantType.growthRate;
+
+            //Atualiza o nome público da planta
+            if (plantType != null) {
+                plantTypeName = plantType.name;
+            } else {
+                plantTypeName = "";
+            };
+
+            SelectSprite();
         } else {
             Debug.Log("Não é possível plantar num vaso cheio");
         }
     }
 
     void AdvanceTime () {
+        gameController.PlaySE(5);
+
         //Função chamada quando 1. o dia avança 2. time skip é usado
         if (receiveLight) lightPoints += 1;
         if (receiveWater) waterPoints += 1;
-        
+
         toNextGrowth -= 1;
-        if (toNextGrowth <= 0) {
+        if (toNextGrowth <= 0 && currentStage.y < 2) {
+            Debug.Log("Advance");
             AdvanceStage();
         }
     }
@@ -142,13 +143,15 @@ public class PlantHealth : MonoBehaviour
     void AdvanceStage () {
         //Calcula para qual estado a planta deve seguir e ajusta sua sprite
 
+        gameController.PlaySE(3);
         if ((plantType.minWater <= waterPoints && waterPoints <= plantType.maxWater)
         && (plantType.minLight <= lightPoints && lightPoints <= plantType.maxLight)) {
-            if (currentStage.x <= 0) {
+            if (currentStage.x < 0) {
                 //Branch ruim -> Sucesso
                 currentStage.x = 1;
             } else {
                 //Branch boa -> Sucesso
+                currentStage.x = 1;
                 currentStage.y += 1;
             }
         } else {
@@ -157,12 +160,15 @@ public class PlantHealth : MonoBehaviour
                 currentStage.x = -1;
             } else {
                 //Branch ruim -> Falha
+                currentStage.x = -1;
                 currentStage.y += 1;
             }
         }
         toNextGrowth = plantType.growthRate;
         waterPoints = 0;
         lightPoints = 0;
+
+        SelectSprite();
     }
 
     void React (int action) {
@@ -200,6 +206,9 @@ public class PlantHealth : MonoBehaviour
         && (plantType.minLight <= lightPoints && lightPoints <= plantType.maxLight)) {
             reactionOutput = 1;
         }
+
+        gameController.PlaySE(4);
+
     }
 
     void Remove () {
@@ -208,7 +217,7 @@ public class PlantHealth : MonoBehaviour
         lightPoints=0;
         waterPoints=0;
         age=0;
-        toNextGrowth=99;
+        toNextGrowth=3;
         receiveLight=false;
         receiveWater=false;
         currentStage=new Vector2(0,0);
@@ -217,7 +226,7 @@ public class PlantHealth : MonoBehaviour
     }
 
     public void NewDay(){
-        Debug.Log("OHAYO SEKAI GOOD MORNING WORLD!!!");
+        // Debug.Log("OHAYO SEKAI GOOD MORNING WORLD!!!");
         receiveLight=false;
         receiveWater=false;
         GameObject sunTransform = transform.Find("Sun").gameObject;
