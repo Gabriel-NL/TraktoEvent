@@ -208,6 +208,9 @@ public class PlantHealth : MonoBehaviour
         && (plantType.minLight <= lightPoints && lightPoints <= plantType.maxLight)) {
             reactionOutput = 1;
         };
+        if (plantType.name == "Carnivora") {
+            reactionOutput = 4;
+        }
         StartCoroutine(ReactAndWait(reactionOutput));
     }
 
