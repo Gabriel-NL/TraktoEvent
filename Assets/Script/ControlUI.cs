@@ -11,6 +11,8 @@ public class ControlUI : MonoBehaviour
     [SerializeField]
     private RectTransform slots_bar;
     private int n_slots_spells=3;
+
+    
     
 
     public void SetSlotsSize(float n_slots_spells)

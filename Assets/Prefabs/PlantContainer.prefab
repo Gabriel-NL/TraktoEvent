@@ -113,7 +113,6 @@ Transform:
   m_LocalScale: {x: 2.5, y: 2.5, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1553988660160081573}
   - {fileID: 105980903307294432}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -235,6 +234,7 @@ Transform:
   m_Children:
   - {fileID: 3035844163381086048}
   - {fileID: 9114027085726911858}
+  - {fileID: 1553988660160081573}
   m_Father: {fileID: 8804547084745689879}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2039777334097940363
@@ -341,7 +341,7 @@ GameObject:
   - component: {fileID: 1553988660160081573}
   - component: {fileID: 8232288133848475633}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Plant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -360,7 +360,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8804547084745689879}
+  m_Father: {fileID: 105980903307294432}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8232288133848475633
 SpriteRenderer:

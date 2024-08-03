@@ -12,6 +12,7 @@ public class PlantHealth : MonoBehaviour
     private SpriteList spriteList;
     private TimeProgression timeProgression;
     
+    
     public string plantTypeName="";
     public int lightPoints=0, waterPoints=0;
     public int age=0;
@@ -38,6 +39,18 @@ public class PlantHealth : MonoBehaviour
 
     void SelectSprite () {
         //Redefine a sprite de uma mplanta dependendo do seu estágio
+
+        if (currentStage== new Vector2(0,0))
+        {
+            spriteRenderer.sprite= spriteList.GetTest(0);
+        }
+
+        if (currentStage== new Vector2(1,0))
+        {
+            spriteRenderer.sprite= spriteList.GetTest(1);
+        }
+ 
+        
         if (plantType != null) {
             plantTypeName = plantType.name;
         } else {
